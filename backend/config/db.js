@@ -1,8 +1,15 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect('mongodb://localhost:27017/');
+        const conn = await mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            dbName: "yourDatabaseName", // replace with your actual DB name
+        });
         console.log(`MongoDB Connected: ${conn.connection.host}`);
     } catch (error) {
         console.error(`MongoDB Error: ${error.message}`);
@@ -11,6 +18,3 @@ const connectDB = async () => {
 };
 
 export default connectDB;
-
-// This code connects to a MongoDB database using Mongoose.
-// It exports a function that establishes the connection and logs the status.
