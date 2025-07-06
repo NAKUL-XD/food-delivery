@@ -8,39 +8,48 @@ const List = ({ url }) => {
   const navigate = useNavigate();
   const [list, setList] = useState([]);
 
-  // ✅ Get admin token directly for now:
+  // ✅ Get token & admin flag
   const token = localStorage.getItem("token");
-  const admin = localStorage.getItem("admin"); // Or however you flag admin
+  const admin = localStorage.getItem("admin");
 
   const fetchList = async () => {
-    const response = await axios.get(`${url}/api/food/list`);
-    if (response.data.success) {
-      setList(response.data.data);
-    } else {
-      toast.error("Error");
+    try {
+      const response = await axios.get(`${url}/api/food/list`);
+      if (response.data.success) {
+        setList(response.data.data);
+      } else {
+        toast.error("Error fetching food list");
+      }
+    } catch (err) {
+      toast.error("Server error");
     }
   };
 
   const removeFood = async (foodId) => {
-    const response = await axios.post(
-      `${url}/api/food/remove`,
-      { id: foodId },
-      { headers: { token } }
-    );
-    await fetchList();
-    if (response.data.success) {
-      toast.success(response.data.message);
-    } else {
-      toast.error("Error");
+    try {
+      const response = await axios.post(
+        `${url}/api/food/remove`,
+        { foodId: foodId }, // ✅ Correct key name!
+        { headers: { token } }
+      );
+      if (response.data.success) {
+        toast.success(response.data.message);
+        fetchList(); // ✅ Refresh list AFTER success
+      } else {
+        toast.error(response.data.message || "Error removing item");
+      }
+    } catch (err) {
+      toast.error("Server error");
     }
   };
 
   useEffect(() => {
     if (!admin && !token) {
-      toast.error("Please Login First");
+      toast.error("Please login first");
       navigate("/");
+    } else {
+      fetchList();
     }
-    fetchList();
   }, []);
 
   return (
