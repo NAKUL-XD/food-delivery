@@ -4,12 +4,14 @@ import axios from 'axios';
 // ✅ 1) Create the CONTEXT
 export const StoreContext = createContext(null);
 
-// ✅ 2) The PROVIDER component — different name!
+// ✅ 2) The PROVIDER component — better name!
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
   const [food_list, setFoodList] = useState([]);
-  const url = "http://localhost:3000";
+
+  // ✅ ✅ ✅ Use VITE env for backend URL!
+  const url = import.meta.env.VITE_API_URL;
 
   // ✅ Add to Cart
   const addToCart = async (itemId) => {
@@ -66,7 +68,7 @@ const StoreContextProvider = (props) => {
       });
 
       if (res.data.success) {
-        setCartItems(res.data.cartData); // Sync cart
+        setCartItems(res.data.cartData);
       }
     } catch (err) {
       console.error("Error fetching cart:", err);
@@ -95,7 +97,7 @@ const StoreContextProvider = (props) => {
       const savedToken = localStorage.getItem("token");
       if (savedToken) {
         setToken(savedToken);
-        await fetchCart(savedToken); // 👈 sync cart
+        await fetchCart(savedToken);
       }
     };
     init();
