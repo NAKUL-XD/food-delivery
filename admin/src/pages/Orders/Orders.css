@@ -1,0 +1,33 @@
+.orders-page {
+  padding: 30px;
+  font-family: Arial, sans-serif;
+}
+
+.orders-page h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.orders-table {
+  display: grid;
+  gap: 10px;
+}
+
+.orders-header,
+.orders-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+  padding: 12px 18px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  align-items: center;
+}
+
+.orders-header {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.orders-row {
+  background-color: #fff;
+}

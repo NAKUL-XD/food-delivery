@@ -1,0 +1,141 @@
+/* Default styles for larger screens */
+.header {
+    height: 34vw; /* Scales based on viewport width */
+    margin: 30px auto;
+    background: url('/header_img.png') no-repeat center center/cover;
+    position: relative;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+/* Header contents */
+.header-contents {
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    font-size: 1.5vw; /* Responsive font size */
+    max-width: 80%;
+    user-select: none;
+    animation: fadeIn 3s;
+}
+
+/* Button styling */
+.header-contents button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: linear-gradient(45deg, #ff6600, #ff4500);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1vw;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    outline: none;
+}
+
+/* Button Hover Effect */
+.header-contents button:hover {
+    background: linear-gradient(45deg, #ff4500, #ff6600);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px);
+}
+
+/* Button Click Effect */
+.header-contents button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === RESPONSIVENESS === */
+
+/* Tablets & Smaller Screens */
+@media screen and (max-width: 1024px) {
+    .header {
+        height: 40vw; /* Slightly larger for smaller screens */
+    }
+
+    .header-contents {
+        font-size: 2vw;
+        left: 8%;
+    }
+
+    .header-contents button {
+        font-size: 1.5vw;
+        padding: 10px 18px;
+    }
+}
+
+/* Mobile Devices */
+@media screen and (max-width: 768px) {
+    .header {
+        height: 50vw;
+        border-radius: 20px;
+    }
+
+    .header-contents {
+        font-size: 3vw;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+    }
+
+    .header-contents h2 {
+        font-size: 4.5vw;
+    }
+
+    .header-contents p {
+        font-size: 3vw;
+    }
+
+    .header-contents button {
+        font-size: 2.5vw;
+        padding: 12px 20px;
+        border-radius: 20px;
+    }
+}
+
+/* Extra Small Devices */
+@media screen and (max-width: 1050px) {
+   
+
+    .header-contents {
+        max-width: 45%;
+    }
+
+ 
+}
+@media screen and (max-width: 750px) {
+    
+
+    .header-contents {
+        max-width: 65%;
+    }
+
+    .header-contents p{
+        display: none;
+    }
+
+    .header-contents button{
+        padding: 2vw 4vw;
+    }
+}
